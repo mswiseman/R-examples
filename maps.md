@@ -168,9 +168,11 @@ demonstrate that you can do almost anything with R… if you’re willing to
 write the code.
 
 ``` r
+# load our data
 shots_sum <- readr::read_csv(url("https://raw.githubusercontent.com/cwickham/basketball-shots/master/shots_sum.csv"))
 
-new<-subset(shots_sum, num_shots < 3000)
+# subset it to remove outlier
+new <- subset(shots_sum, num_shots < 3000)
 ```
 
 ``` r
