@@ -3,7 +3,7 @@ Examples of different data visualization techniques in R relevant to my work
 
 [Animations](animations.md)
 
-[Bar and pie graphs](bargraphs.md)
+[Bar and pie graphs](bar_graphs_git.md)
 
 [Mapping](mapping.md)
 
