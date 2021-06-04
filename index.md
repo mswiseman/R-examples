@@ -2,7 +2,7 @@
 
 Examples of different data visualization techniques in R.
 
-* [animation](/animation.md)
-* [bar graphs](/bar_graphs_git.md)
-* [mapping](/mapping.md)
-* [point and line graphs](/point.md)
+* [animation](/animation.Rmd)
+* [bar graphs](/bar_graphs_git.Rmd)
+* [mapping](/mapping.Rmd)
+* [point and line graphs](/point.Rmd)
