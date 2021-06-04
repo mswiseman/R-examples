@@ -7,9 +7,12 @@ June 4th, 2021
 
 ### Example 1: COVID
 
-The first example uses: \* dplyr filtering, selecting, and na. removal
-\* labeling of title, caption, legend \* manual color scaling (package:
-scales) \* log transformation \* usmap packages
+The first example uses: 
+* dplyr filtering, selecting, and na. removal
+* labeling of title, caption, legend 
+* manual color scaling (package: scales) 
+* log transformation 
+* usmap packages
 
 ``` r
 #https://cran.r-project.org/web/packages/usmap/vignettes/mapping.html
@@ -99,9 +102,13 @@ ggsave("plot3-3.png",
 
 ### Example 2: Powdery mildew spatial data
 
-The second example uses: \* dplyr filtering, selecting, and na. removal
-\* labeling of title, caption, legend \* manual color scaling (package:
-scales) \* log transformation \* usmap packages
+The second example uses: 
+* dplyr filtering, selecting, and na. removal
+* labeling of title, caption, legend 
+* multiple layers 
+* 2d density geom
+* log transformation 
+* ggmap package
 
 ``` r
 #importing and tidying data
