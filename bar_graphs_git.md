@@ -5,10 +5,6 @@ date: "June 4th, 2021"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## Bar charts
 
 ### Example 1: COVID
