@@ -57,10 +57,9 @@ map1 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
     labs(title = "COVID cumulative deaths per county (April 8th, 2021)", 
          caption = "Counties shaded in grey have either zero documented cases or are missing from the dataset.")
 
-map1
 ```
 
-![](maps_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3.png)<!-- -->
 
 ``` r
 #Here's the log transformation. 
