@@ -86,7 +86,7 @@ map3 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
        caption = "Counties shaded in grey have either zero documented cases or are missing from the dataset.")
 ```
 
-[](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3.png)
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3.png)
 
 ### Example 2: Powdery mildew spatial data
 
@@ -158,7 +158,7 @@ ggsave("plot4.png",
        dpi = 300)
 ```
 
-[](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot4.png)
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot4.png)
 
 ### Example 3: Mapping basketball coordinate data to a custom polygon.
 
@@ -321,4 +321,4 @@ ggsave("plot5.png",
        dpi = 300)
 ```
 
-[](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot5.png)
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot5.png)
