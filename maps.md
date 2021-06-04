@@ -59,7 +59,7 @@ map1 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
 
 ```
 
-![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3.png)<!-- -->
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3-1.png)
 
 ``` r
 #Here's the log transformation. 
@@ -72,7 +72,7 @@ map2 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
 map2
 ```
 
-![](maps_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3-2.png)
 
 ``` r
 #set color palette
@@ -86,7 +86,7 @@ map3 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
        caption = "Counties shaded in grey have either zero documented cases or are missing from the dataset.")
 ```
 
-![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3.png)
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3-3.png)
 
 ### Example 2: Powdery mildew spatial data
 
