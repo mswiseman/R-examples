@@ -5,6 +5,6 @@ Examples of different data visualization techniques in R relevant to my work
 
 [Bar and pie graphs](bar_graphs_git.md)
 
-[Mapping](mapping.md)
+[Mapping](maps.md)
 
 [Point and line graphs](linegraphs.md)
