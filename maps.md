@@ -47,7 +47,6 @@ colnames(covid_county_latest)
 #rename county_fips to make compatible with usmap (only allows "fips)
 covid_county_latest$fips <- covid_county_latest$county_fips
 
-
 #Looks like I'm missing county data for some places (like New York), but dataset seems pretty complete. Good enough for the exercise. 
 
 #this isn't very informative because there are such large differences, so let's log transform. 
@@ -57,10 +56,13 @@ map1 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
     labs(title = "COVID cumulative deaths per county (April 8th, 2021)", 
          caption = "Counties shaded in grey have either zero documented cases or are missing from the dataset.")
 
+ggsave("plot3-1.png",
+        width = 6,
+       height = 4,
+       units = "in",
+       dpi = 300)
 ```
-
 ![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3-1.png)
-
 ``` r
 #Here's the log transformation. 
 map2 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "deaths_total") +
@@ -69,11 +71,13 @@ map2 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
     labs(title = "Log transformed COVID cumulative deaths per county (April 8th, 2021)", 
          caption = "Counties shaded in grey have either zero documented cases or are missing from the dataset.")
 
-map2
+ggsave("plot3-2.png",
+        width = 6,
+       height = 4,
+       units = "in",
+       dpi = 300)
 ```
-
 ![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3-2.png)
-
 ``` r
 #set color palette
 myColors <- c("#0066FFFF", "#00CCFFFF", "#00FFCCFF", "#00FF66FF", "#00FF00FF", "#66FF00FF", "#CCFF00FF", "#FFCC00FF", "#FF6600FF", "#FF0000FF")
@@ -84,8 +88,13 @@ map3 <- plot_usmap(regions = "counties", data = covid_county_latest, values = "d
   theme(legend.position = "right") +
   labs(title = "Log transformed COVID cumulative deaths per county (April 8th, 2021)", 
        caption = "Counties shaded in grey have either zero documented cases or are missing from the dataset.")
+       
+ggsave("plot3-3.png",
+        width = 6,
+       height = 4,
+       units = "in",
+       dpi = 300)
 ```
-
 ![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot3-3.png)
 
 ### Example 2: Powdery mildew spatial data
