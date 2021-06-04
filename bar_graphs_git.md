@@ -81,7 +81,7 @@ plot1 <- ggplot(contin_cases,
 
 ggsave("plot1.png")
 ```
-![first example](plot1.png)
+![first example](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot1.png)
 
 
 ### Example 2: Transportation
@@ -123,6 +123,8 @@ plot2 <- ggplot(commute_nw)+
 
 ggsave("plot2.png")
 ```
-![first example](plot2.png)
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot2.png)
+
+
 
 ### Example 3: more soon
