@@ -29,9 +29,6 @@ library(lubridate)
 library(readxl)
 library(ggmap)
 
-#load data (downloaded from here: https://covidcountydata.org/data/download)
-#covid2 <- read_csv("~/Downloads/deaths_2021-04-09T03:00.csv")   #be sure to change to your directory
-
 #the other file didn't seem complete, lets try this one.
 covid3 <- read_csv("~/Downloads/all_current_date_2021-04-09T03:00 2.csv")
 
