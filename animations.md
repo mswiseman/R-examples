@@ -100,13 +100,13 @@ caption <- "Figure 1. Each point represents n number of observations from the re
 
 # Here's the final animation and plot code
 my.animation<-ggplot(data = west_coast) + 
-  geom_polygon(aes(x = long,
+  geom_polygon(aes(x = long,                #geom_polygon is our custom polygon of the western states
                    y = lat,
                    group = group),
                fill = "white",
                color = "darkgray") + 
   coord_quickmap()+
-  geom_count(data = psilocybe_inat_accurate_animation, 
+  geom_count(data = psilocybe_inat_accurate_animation,     #geom_count is a special form of geom_point that counts overlapping points and adjusts size accordingly
              mapping = aes(
                x = longitude,
                y = latitude,
@@ -119,15 +119,15 @@ my.animation<-ggplot(data = west_coast) +
     breaks= c(1,2,3,4),
     max_size = 4) +
   scale_size(
-    range = c(2,7), 
-    breaks = c(1,2,3,4)) +
+    range = c(2,7),                         #the size range for my circles. 1 was too small, so I started with 2. 
+    breaks = c(1,2,3,4)) +                  #ggplot was automatically assinging 0.5 points in my scale; you can't have half an observation. This changes that. 
   scale_fill_manual(
     name = "Species",
     values = safe_colorblind_palette) +
   theme_bw() +
   guides(fill = 
            guide_legend(
-             override.aes = list(size=5))) +
+             override.aes = list(size=5))) +           #this manually scales the circles in my key legend so they're bigger
   theme(
     plot.background= element_blank(),
     panel.background = element_rect(fill = "white"),
@@ -144,14 +144,14 @@ my.animation<-ggplot(data = west_coast) +
        x = 'Longitude',
        y = 'Latitude',
        caption = wrapper(caption, width =75)) +
-  transition_states(
-    month,
-    transition_length = 2,
-    state_length = 3
+  transition_states(                                       #gganimation starts here
+    month,                                                 #animating by month
+    transition_length = 2,                                 #how long each transition takes
+    state_length = 3                                       #how long each frame stays
   ) +
-  enter_fade() + 
+  enter_fade() +                                           #the next three lines are stylistic choices for animation movement, entrance, and exit
   exit_shrink() +
-  ease_aes('sine-in-out')
+  ease_aes('sine-in-out')                                  
 
 
 # I need a two part animation process to ensure the plot will size correctly.
