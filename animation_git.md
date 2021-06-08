@@ -161,6 +161,6 @@ anim_save("final_animation.gif", animation = last_animation())
 
 Here is my final product:
 
-![](final_animation.gif)
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/final_animation.gif)
 
   
