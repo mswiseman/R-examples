@@ -163,4 +163,63 @@ Here is my final product:
 
 ![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/final_animation.gif)
 
+  # Example 2: Animating a basic bar chart
   
+```r
+#load required packages... some of these may not be necessary...I didn't triple check.
+#remember, if you need to install any packages, the command is: install.packages('packagenamehere')
+library(magrittr)
+library(rvest)
+library(readxl)
+library(gridExtra) 
+library(tidyverse)  
+library(stringr)
+library(hrbrthemes)
+library(scales)
+library(readr)
+library(gganimate)
+library(magick)
+library(janitor)
+
+#load freely available data
+covid<- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv", na = ".")
+
+#it's a huge file, so I trimmed it down
+covid_simplified <- subset(covid, select=c(iso_code, date, total_cases, continent, new_cases, reproduction_rate))
+
+#I'm just interested in North America for this example, so I use dplyr to filter North America by ISO code. 
+covid_north_america <- covid_simplified %>%
+  filter(iso_code %in% north_america)
+
+#Make a North America ISO code vector
+north_america <- c("USA", "MEX", "CAN")
+
+#Checking the structure and dataframe for any errors
+str(covid_simplified)
+View(covid_simplified)
+
+#Trimming it down because large animations are memory and space intensive
+covid_north_america_short <- covid_north_america %>%
+  filter(date > "2020-06-17" & date <"2020-06-30")
+
+```
+
+```r
+
+#The animation. Admittedly, this isn't super polished, but you can get an idea of polishing from the above example.
+a <- ggplot(covid_north_america_short, aes(x = iso_code, y = total_cases, fill= iso_code)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Date: {closest_state}") +
+  geom_text(aes(label = total_cases, y = total_cases),
+            position = position_dodge(0.9), vjust = -1 ) +
+  theme_classic() +
+  transition_states(states = date, transition_length = 2, state_length = 1) + 
+  enter_fade() + 
+  exit_shrink() +
+  ease_aes('sine-in-out')
+```
+
+Final bar chart product:
+
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/final_animation2.gif)
+
