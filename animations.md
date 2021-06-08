@@ -165,6 +165,9 @@ Here is my final product:
 
   # Example 2: Animating a basic bar chart
   
+* More practice with dpylr, gganimate
+* Minor polishing
+  
 ```r
 #load required packages... some of these may not be necessary...I didn't triple check.
 #remember, if you need to install any packages, the command is: install.packages('packagenamehere')
@@ -204,6 +207,8 @@ covid_north_america_short <- covid_north_america %>%
   filter(date > "2020-06-17" & date <"2020-06-30")
 
 ```
+
+## Now for the animation
 
 ```r
 
