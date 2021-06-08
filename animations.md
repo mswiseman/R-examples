@@ -180,6 +180,7 @@ library(readr)
 library(gganimate)
 library(magick)
 library(janitor)
+library(maps)
 
 #load freely available data
 covid<- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv", na = ".")
@@ -207,16 +208,31 @@ covid_north_america_short <- covid_north_america %>%
 ```r
 
 #The animation. Admittedly, this isn't super polished, but you can get an idea of polishing from the above example.
-a <- ggplot(covid_north_america_short, aes(x = iso_code, y = total_cases, fill= iso_code)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Date: {closest_state}") +
-  geom_text(aes(label = total_cases, y = total_cases),
-            position = position_dodge(0.9), vjust = -1 ) +
+
+a <- ggplot(covid_north_america_short,               #here's the data frame
+            aes(x = iso_code,                        #countries on x axis
+                y = total_cases,                     #cases on y axis
+                fill= iso_code)) +
+  geom_bar(stat = "identity") +                      #we're making a bar chart
+  labs(title = "North American COVID-19 cases from June 17th to June 30th, 2020",
+      subtitle = "Date: {closest_state}") +
+  ylab("Total COVID-19 Cases")+
+  xlab("North American Country")+
+  geom_text(aes(label = total_cases, 
+                y = round(total_cases, digits=0)),   #rounding integers above bars
+            position = position_dodge(0.9), 
+            vjust = -1) +
   theme_classic() +
-  transition_states(states = date, transition_length = 2, state_length = 1) + 
+  theme(
+    legend.title = element_blank()
+  )+
+  transition_states(states = date,                   #animating by date
+                    transition_length = 1,           #shorter transition
+                    state_length = 3) +              #longer time at each frame
   enter_fade() + 
   exit_shrink() +
   ease_aes('sine-in-out')
+  
 ```
 
 Final bar chart product:
