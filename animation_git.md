@@ -3,21 +3,31 @@ Animations
 Michele Wiseman
 June 7th, 2021
 
-``` r
-#good resources:
-#https://luisdva.github.io/rstats/GIS-with-R/
-#https://m-clark.github.io/posts/2020-03-23-covid/
-#https://cengel.github.io/R-spatial/mapping.html
-#https://blog.mastermaps.com/
-#http://thematicmapping.org/downloads/world_borders.php
-#https://www.r-graph-gallery.com/choropleth-map-in-r.html
-#https://github.com/adamgibbons/oregon-choropleth
-#https://blogs.oregonstate.edu/developer/2017/06/26/building-geometries-new-data-locations-api/
-#https://www.r-bloggers.com/2013/01/maps-in-r-plotting-data-points-on-a-map/
-```
+Good resources for maps and animation
+* https://luisdva.github.io/rstats/GIS-with-R/
+* https://m-clark.github.io/posts/2020-03-23-covid/
+* https://cengel.github.io/R-spatial/mapping.html
+* https://blog.mastermaps.com/
+* http://thematicmapping.org/downloads/world_borders.php
+* https://www.r-graph-gallery.com/choropleth-map-in-r.html
+* https://github.com/adamgibbons/oregon-choropleth
+* https://blogs.oregonstate.edu/developer/2017/06/26/building-geometries-new-data-locations-api/
+* https://www.r-bloggers.com/2013/01/maps-in-r-plotting-data-points-on-a-map/
+
+
+# Example 1: Animating data from iNaturalist
+
+Techniques learned/used:
+* How to use ```rinat``` package
+* Tidying data
+* Animating geom_point/geom_size data with gganimate
+* Manual scaling
+* Adding multiple scales
+* Creating a wrapping function
 
 ``` r
-library(ggspatial)
+#load required packages 
+library(ggspatial) 
 library(lwgeom)
 library(sf)
 library(tidyverse)
@@ -29,14 +39,14 @@ library(rgdal)
 library(maps)
 library(geojsonio)
 
-#df west coast
+# Make a dataframe for the state maps
+states <- map_data("state")
+
+# Make a dataframe for the west coast (using one of the map packages above)
 west_coast <- states %>%
   filter(region %in% c("california", "oregon", "washington"))
 
-#df for states
-states <- map_data("state")
-
-#use rinat package to download a inat dataframe
+# Use rinat package to download a inat dataframe
 psilocybe_inat <- get_inat_obs(
   taxon_id = 54026,
   place_id = 65360,
@@ -46,27 +56,28 @@ psilocybe_inat <- get_inat_obs(
   meta = FALSE
 )
 
-#filter for accuracy and open coordinates
+# Filter for accuracy and open coordinates
 psilocybe_inat_accurate <- psilocybe_inat %>% 
   filter(public_positional_accuracy < 1000) %>% 
   filter(coordinates_obscured == "false")
 
-#loading colorblind safe palette
+# Loading colorblind safe palette into a vector
 safe_colorblind_palette <- c("#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", 
                              "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888")
 
 
-#make columns for year month and day so I can animate by month
+# Changing columns for year month and day so I can animate by month
 psilocybe_inat_accurate_animation <- psilocybe_inat_accurate %>%
   separate(datetime, sep="-", into = c("year", "month", "day"))
 
-#writing a function so I can automatically wrap text
+# Writing a function so I can automatically wrap text (otherwise it will get cut off)
+
 wrapper <- function(x, ...) 
 {
   paste(strwrap(x, ...), collapse = "\n")
 }
 
-#Renaming months
+#Renaming months from numbers to characters
 psilocybe_inat_accurate_animation$month[psilocybe_inat_accurate_animation$month=="01"] <- "January"
 psilocybe_inat_accurate_animation$month[psilocybe_inat_accurate_animation$month=="02"] <- "February"
 psilocybe_inat_accurate_animation$month[psilocybe_inat_accurate_animation$month=="03"] <- "March"
@@ -80,14 +91,14 @@ psilocybe_inat_accurate_animation$month[psilocybe_inat_accurate_animation$month=
 psilocybe_inat_accurate_animation$month[psilocybe_inat_accurate_animation$month=="11"] <- "November"
 psilocybe_inat_accurate_animation$month[psilocybe_inat_accurate_animation$month=="12"] <- "December"
 
-#need to re-order months. 
+# Re-ordering months so they go from January -> December
 psilocybe_inat_accurate_animation$month <- factor(psilocybe_inat_accurate_animation$month, levels = month.name)
 
-#creating vectors for my labels
+# Creating vectors for my labels, this tidies things and allows me to use my wrapper function. 
 title <- "The diversity and abundance of Psilocybe spp. is greatest in November and December in the western US."
 caption <- "Figure 1. Each point represents n number of observations from the respective species. Data was retrieved from research grade iNaturalist observations. Some species (ex. Ps. cyanescens) are missing due to obscured datapoints."
 
-#Animation and plot code
+# Here's the final animation and plot code
 my.animation<-ggplot(data = west_coast) + 
   geom_polygon(aes(x = long,
                    y = lat,
@@ -143,7 +154,7 @@ my.animation<-ggplot(data = west_coast) +
   ease_aes('sine-in-out')
 
 
-#two part animation process since the gif wasn't embedding correctly. 
+# I need a two part animation process to ensure the plot will size correctly.
 animate(my.animation, height = 500, width = 450)
 anim_save("final_animation.gif", animation = last_animation())
 ```
