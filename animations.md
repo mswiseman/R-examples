@@ -242,5 +242,6 @@ a <- ggplot(covid_north_america_short,               #here's the data frame
 
 Final bar chart product:
 
+
 ![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/final_animation2.gif)
 
