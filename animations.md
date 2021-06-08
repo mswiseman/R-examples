@@ -13,6 +13,7 @@ Good resources for maps and animation
 * https://github.com/adamgibbons/oregon-choropleth
 * https://blogs.oregonstate.edu/developer/2017/06/26/building-geometries-new-data-locations-api/
 * https://www.r-bloggers.com/2013/01/maps-in-r-plotting-data-points-on-a-map/
+* https://gganimate.com/articles/gganimate.html
 
 
 # Example 1: Animating data from iNaturalist
@@ -47,6 +48,9 @@ west_coast <- states %>%
   filter(region %in% c("california", "oregon", "washington"))
 
 # Use rinat package to download a inat dataframe
+# I have chosen filters for taxon_id (Psilocybe spp.), place_id (west coast), quality (research), geo = TRUE (only if geo coordinates are available).
+# Package documentation here: 
+
 psilocybe_inat <- get_inat_obs(
   taxon_id = 54026,
   place_id = 65360,
@@ -100,21 +104,21 @@ caption <- "Figure 1. Each point represents n number of observations from the re
 
 # Here's the final animation and plot code
 my.animation<-ggplot(data = west_coast) + 
-  geom_polygon(aes(x = long,                #geom_polygon is our custom polygon of the western states
+  geom_polygon(aes(x = long,                # geom_polygon is a polygon of the western states; this is the first layer
                    y = lat,
                    group = group),
                fill = "white",
                color = "darkgray") + 
   coord_quickmap()+
-  geom_count(data = psilocybe_inat_accurate_animation,     #geom_count is a special form of geom_point that counts overlapping points and adjusts size accordingly
-             mapping = aes(
+  geom_count(data = psilocybe_inat_accurate_animation,     # geom_count is a special form of geom_point that counts overlapping points and adjusts size accordingly
+             mapping = aes(                                 #second layer geom
                x = longitude,
                y = latitude,
-               fill = scientific_name), 
-             color = "black",
-             shape= 21,
-             alpha= 0.7,
-             stroke = 1) +
+               fill = scientific_name),                     # any attributes within the aesthetics paranthesis will automatically have a legend
+             color = "black",                               # color of shape outline
+             shape= 21,                                     # shape 21 allows for fill and stroke
+             alpha= 0.7,                                    # alpha = transparency. Higher = more transparent. 
+             stroke = 1) +                                  # stroke = outine size
   scale_size_area(
     breaks= c(1,2,3,4),
     max_size = 4) +
@@ -122,13 +126,13 @@ my.animation<-ggplot(data = west_coast) +
     range = c(2,7),                         #the size range for my circles. 1 was too small, so I started with 2. 
     breaks = c(1,2,3,4)) +                  #ggplot was automatically assinging 0.5 points in my scale; you can't have half an observation. This changes that. 
   scale_fill_manual(
-    name = "Species",
-    values = safe_colorblind_palette) +
-  theme_bw() +
+    name = "Species",                                       # This names my "fill"-based legend
+    values = safe_colorblind_palette) +                     # Loading colorblind safe colors
+  theme_bw() +                                              # themes can be found here: https://ggplot2.tidyverse.org/reference/ggtheme.html
   guides(fill = 
            guide_legend(
-             override.aes = list(size=5))) +           #this manually scales the circles in my key legend so they're bigger
-  theme(
+             override.aes = list(size=5))) +                # this manually scales the circles in my key legend so they're bigger
+  theme(                                                    # Customization of my theme. Learn more here: https://rpubs.com/mclaire19/ggplot2-custom-themes
     plot.background= element_blank(),
     panel.background = element_rect(fill = "white"),
     panel.grid.major = element_blank(),
@@ -144,12 +148,12 @@ my.animation<-ggplot(data = west_coast) +
        x = 'Longitude',
        y = 'Latitude',
        caption = wrapper(caption, width =75)) +
-  transition_states(                                       #gganimation starts here
-    month,                                                 #animating by month
-    transition_length = 2,                                 #how long each transition takes
-    state_length = 3                                       #how long each frame stays
+  transition_states(                                       # Gganimation starts here
+    month,                                                 # animating by month
+    transition_length = 2,                                 # how long each transition takes
+    state_length = 3                                       # how long each frame stays
   ) +
-  enter_fade() +                                           #the next three lines are stylistic choices for animation movement, entrance, and exit
+  enter_fade() +                                           # the next three lines are stylistic choices for animation movement, entrance, and exit
   exit_shrink() +
   ease_aes('sine-in-out')                                  
 
