@@ -200,8 +200,8 @@ we’d want to use **ggplot2**.
 
 There’s an entire book about [ggplot2](https://ggplot2-book.org/), but, you can learn the
 package fairly quickly by understanding how ggplot2 works. In general,
-ggplot works using the by layering **geoms**, geometric objects, and
-specifying their each layers **aesthetics** (aes).
+ggplot works using the by layering **geoms**, geometric objects, and then
+specifying the **aesthetics** (aes) for these geoms.
 
 There’s a ton of customizability with ggplot, so knowing the components
 of a plot helps you know what you can customize.
@@ -223,7 +223,7 @@ The components of a plot are:
 For more info, check out [this cheatsheet on
 ggplot2](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf).
 
-Back to the scheduled content…
+*Back to the scheduled content…*
 
 ``` r
 #So, if we wanted to make our points a polygon and instead use ggplot, we'd change plot to FALSE. We'd also need to create a custom polygon of the map shape. 
