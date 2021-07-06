@@ -190,7 +190,7 @@ chanterelle_map <- inat_map(chanterelle_inat_oregon, plot = TRUE, map = "usa")
 
 ```
 
-![](Mapping_with_iNaturalist_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![With inat_map](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/p1.png)
 
 Unfortunately, customization options are pretty limited with
 (`inat_map`), but it’s nice for quick plotting. For superior mapping,
@@ -273,7 +273,7 @@ theme_bw() +                                               #just a baseline them
 chanterelle_ggplot                                         #this allows you to see the map
 ```
 
-![](Mapping_with_iNaturalist_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![With ggplot(1)](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/p2.png)
 
 If we wanted to customize the labels on our chart, we can do that by
 adding another layer to our `chanterelle_ggplot` dataframe using
@@ -284,7 +284,7 @@ chanterelle_ggplot +
   labs(title = "Pacific Golden Chanterelle iNaturalist Observations in Oregon")
 ```
 
-![](Mapping_with_iNaturalist_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![With ggplot(2)](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/p3.png)
 
 It’s probably obvious that we’re plotting geodata, so I often like to
 omit the x/y axis labels on maps. You can do this by defining x/y labs
@@ -302,7 +302,7 @@ chanterelle_ggplot +
   )
 ```
 
-![](Mapping_with_iNaturalist_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![With ggplot(3)](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/p4.png)
 
 Lastly, lets fix the legend. Scientific names are always italicized…
 plus that title is ugly (and unnecessary with only one species). We can
@@ -319,12 +319,14 @@ chanterelle_ggplot +
     legend.text = element_text(face = "italic"))
 ```
 
-![](Mapping_with_iNaturalist_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![With ggplot(4)](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/p5.png)
 
 Obviously there’s a lot more you can do with iNaturalist data in R using
 ggplot, Shiny, etc. R is great for reproducibility because you can
 literally give your colleague the code and they can run it and produce
-the same result. On the other hand, tools like Tableau are great because
+the same result. 
+
+On the other hand, tools like Tableau are great because
 they’re just so much easier to use, but it’s hard to tell someone how to
 recreate what you did. Tableau is improving, but you’ll see that very
 few people in the sciences use it… it’s more of a tool in business and
