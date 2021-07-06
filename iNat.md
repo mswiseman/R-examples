@@ -130,13 +130,11 @@ can always load the package and get help with particular commands using*
 #only install them if necessary, if not delete the install commands or comment them out using a hashtag
 #install.packages("tidyverse")
 #install.packages("rinat")
-#install.packages("lubridate")
 #install.packages("maps")       #only for mapping with iNat in R. 
 
 #next you need to tell R to load the packages you just installed. You need to do this every time you open R.
 library(tidyverse)
 library(rinat)
-library(lubridate)
 library(maps)
 ```
 
