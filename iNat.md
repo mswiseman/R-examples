@@ -288,7 +288,7 @@ chanterelle_ggplot +
 
 It’s probably obvious that we’re plotting geodata, so I often like to
 omit the x/y axis labels on maps. You can do this by defining x/y labs
-as empty through the theme specifications using
+as empty in `theme()` using
 `axis.title = element_blank()`. There’s so much theme customization you
 can do. Check out
 [here](https://ggplot2.tidyverse.org/reference/theme.html) for more
