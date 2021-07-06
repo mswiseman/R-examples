@@ -144,7 +144,7 @@ library(maps)
 
 R is open source and therefore has packages that are notoriously
 outdated, error-prone, etc. You can always check the status of a package
-by looking at it’s cran repository information. The cran page for a
+by looking at its cran repository information. The cran page for a
 package will tell you when it was last updated, any necessary
 dependencies for the package, will link you to the reference manual, and
 will link you to a page where you can submit bug fix requests. *Most
