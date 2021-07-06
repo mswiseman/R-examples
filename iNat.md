@@ -1,4 +1,4 @@
-Mapping with iNat: Tutorial for the Uehling Lab
+Mapping with iNat
 ================
 Michele Wiseman
 July 6th, 2021
@@ -88,9 +88,8 @@ Anyway, you can rinse an repeat to get an idea for what a location’s
 pacific northwest united states), then you can determine the coordinate
 limits of the bounding box and specify them in your url. There’s a nice
 tool that helps with bounding box determination
-[here](https://boundingbox.klokantech.com/). You can also use google
-maps. You can also create some bounding boxes by searching by an
-observation, clicking map, moving around, and then clicking
+[here](https://boundingbox.klokantech.com/), you can use google
+maps, or you can create a bounding box in iNaturalist by clicking 
 `Redo search in map`. You’ll notice the url will change to include a
 bounding box.
 
@@ -170,10 +169,10 @@ mushroom hunting season).
 
 chanterelle_inat_oregon <- get_inat_obs(
   taxon_id = 120443,
-  place_id = 10,           #This is for Oregon
+  place_id = 10,                  #This is for Oregon
   quality = "research",       
-  geo = TRUE,                 #Specifies that we want geocoordinates
-  maxresults = 1000,         #Limits results... too many and it'll be cumbersome to work with locally
+  geo = TRUE,                     #Specifies that we want geocoordinates
+  maxresults = 1000,              #Limits results... too many and it'll be cumbersome to work with locally
   meta = FALSE                
 )
 
@@ -184,10 +183,11 @@ You can then choose to directly map the observations using their
 internal mapping feature (`inat_map`), use it as a layer in ggplot, or
 export the spreadsheet to Tableau.
 
-``` r
-#First example is mapping with inatmap. You can figure out the different map names by looking into the map package documentation. 
+Our first example is mapping with `inat_map`. You can figure out the different map names by looking into the [map package documentation](https://www.rdocumentation.org/packages/maps/). 
 
+``` r
 chanterelle_map <- inat_map(chanterelle_inat_oregon, plot = TRUE, map = "usa")
+
 ```
 
 ![](Mapping_with_iNaturalist_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
