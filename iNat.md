@@ -198,9 +198,8 @@ we’d want to use **ggplot2**.
 
 ### ggplot2
 
-There’s an entire book about [ggplot2](https://ggplot2-book.org/), so I
-can’t cover it all without overwhelming you, but, you can learn the
-package fairly quickly by understanding how ggplot works. In general,
+There’s an entire book about [ggplot2](https://ggplot2-book.org/), but, you can learn the
+package fairly quickly by understanding how ggplot2 works. In general,
 ggplot works using the by layering **geoms**, geometric objects, and
 specifying their each layers **aesthetics** (aes).
 
