@@ -21,7 +21,7 @@ beaver](https://www.inaturalist.org/observations?place_id=any&taxon_id=43794),
 as an example.
 
 Reference the url and you’ll notice that the beaver is given a taxon ID:
-43794. This is true for all taxa on iNaturalist.Further, you can
+43794. This is true for all taxa on iNaturalist. Further, you can
 actually specify a location in the url (the default is “any”). When you
 realize this, you can actually hack the iNaturalist search system by
 appending the urls to search for multiple taxa and specific locations.
