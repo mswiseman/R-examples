@@ -15,7 +15,7 @@ understanding species hybridization, tracking invasive species, etc.
 ## On iNaturalist navigation
 
 The more CS you are exposed to, the more patterns you’ll recognize in
-solidly build databases and websites. iNaturalist is no different. Let’s
+well designed databases and websites. iNaturalist is no different. Let’s
 look at OSU’s mascot, the [American
 beaver](https://www.inaturalist.org/observations?place_id=any&taxon_id=43794),
 as an example.
