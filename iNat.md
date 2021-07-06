@@ -5,7 +5,7 @@ July 6th, 2021
 
 # Using iNaturalist data
 
-iNaturalist is a wonderful tool that helps bridge the gap between
+[iNaturalist](https://www.inaturalist.org/) is a wonderful tool that helps bridge the gap between
 citizen scientists and research scientists. When iNaturalist observers
 take high quality photographs of taxa, upload them with geodata, and
 include relevant notes, these data can then be used in a multitude of
