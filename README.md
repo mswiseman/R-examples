@@ -7,6 +7,6 @@ Examples of different data visualization techniques in R relevant to my work
 
 [Mapping](maps.md)
 
-[Point and line graphs](linegraphs.md)
+[Point graphs](point_graphs.md)
 
 [Understanding iNaturalist organization](iNat.md)
