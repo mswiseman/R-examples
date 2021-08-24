@@ -37,15 +37,15 @@ tidy_oils <- read_excel("~/Desktop/tidy_oils.xlsx")
 
 As we can see, the data is currently in wide format. We need it in long format for ggplot to read it correctly. 
 
-![wideformat](wideformat.png)
+![wideformat](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/wideformat.png)
 
 ``` r 
 #Converting to long form and removing any "na" cells. 
 melt_tidy_oils <- melt(tidy_oils, na.rm = TRUE, id.vars = c("ID","Nitrogen","Sulfur","Replicate","Year","Treatment"))
 
 ```
-Alas, long format!
-![longformat](longformat.png)
+Alas, long format
+![longformat](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/longformat.png)
 
 #### Data transformations
 Now we need to try to figure out the effect the different treatments had on each variable. If there were a known standard, we would simply compare our treatment values to the known values, but there are no standards for the treatments we're examining. Alas, we're going to creat a point of reference by taking the grand mean of each variable (in this case, each oil compound), and then finding the average difference from the grand mean for each treatment. 
@@ -78,7 +78,7 @@ oil_4 <- oil_4 %>%
 oil_4 <- oil_4 %>%
   rename(Value = value)
 
-View(oil_4)
+View(oil_4).                                                     # check out your data before proceeding
 ```
 
 #### Making the plot
@@ -126,7 +126,7 @@ gp <-p + geom_point(aes(x = reorder(Compound),                   # orders labels
 gp
 ```
 
-![nxsplot1](nxsplot1.png)
+![nxsplot1](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/nxsplot1.png)
 
 ### Example 2: combining point graphs
 The second example builds on the first and adds: 
@@ -203,4 +203,4 @@ p2 <-annotate_figure(
 )
 ```
 
-![nxsplot2](nxsplot2.png)
+![nxsplot2](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/nxsplot2.png)
