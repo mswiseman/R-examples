@@ -336,3 +336,49 @@ working directory? Check with `getwd()`.
 ``` r
 write.csv(chanterelle_inat_oregon, "chanterelle_inat_oregon.csv", row.names = FALSE)
 ```
+
+Want to move to next level awesomeness? Try automating some of this process using this script: 
+
+```r
+library(rinat)
+
+# A function to call `get_inat_obs` iteratively for each taxon_id present in a vector
+batch_get_inat_obs <- function(
+  taxon_ids_vector,            #No Default, so required, a vector of taxids
+  place_id = 10,               #Default to 10, Oregon
+  geo = TRUE,                  #Default to TRUE
+  maxresults = 1000,           #Default to 1000 results max
+  meta = FALSE                 #Default to FALSE
+) {
+  
+  # The dataframe (empty now) which we will return at the end, once it's full of results
+  return_df = data.frame()
+  
+  # Iterate over the taxon ids in `taxon_ids_vector`, querying each again inaturalist 
+  for (tid in taxon_ids_vector) {
+    
+    #Report status to console
+    print(paste("Querying the following taxon id now:", tid))
+    
+    #Query inat here, using this taxon_id (`tid`, this iteration), and the other argument values
+    #from the function declaration
+    this_query = get_inat_obs(taxon_id = tid, 
+                              place_id = place_id,
+                              geo = geo,
+                              maxresults = maxresults,
+                              meta = meta)
+    
+    #Add the result of `get_inat_obs` on this iteration to a growing dataframe
+    return_df = rbind(return_df, this_query)
+  }
+  
+  #After the loop is done, return the full dataframe
+  return(return_df)
+}
+
+# The vector of taxon_ids
+tids = c(47348, 48701, 415504, 63020, 48422, 49160)
+
+# Call the function and assign the result to `oregon_edibles`
+oregon_edibles = batch_get_inat_obs(tids)
+```
