@@ -18,11 +18,14 @@ The first example uses:
 -   element\_text theme adjustment
 
 ``` r
+```{r}
 #load necessary packages
 library(tidyverse)
 library(stringr)
 library(hrbrthemes)
 library(scales)
+library(ggpubr)
+library(readr)
 
 #load data
 covid<- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv", na = ".")  
@@ -30,7 +33,7 @@ covid<- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/pu
 view(covid)
 
 #this makes a new dataframe (total_cases) that only has the latest COVID cases count and location data
-total_cases <- covid %>% filter(date == "2021-06-01") %>% 
+total_cases <- covid %>% filter(date == "2021-05-23") %>% 
   group_by(location, total_cases) %>% 
   summarize()
 
@@ -52,25 +55,61 @@ contin_cases <- total_cases %>%
 #Loading a colorblind accessible pallete
 cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
+#Add a column that rates proportion of cases categorically.   
+contin_cases <- contin_cases %>% 
+  mutate(rating = case_when(prop_total <= 0.1 ~ 'low',
+                            prop_total <= 0.2 ~ 'medium',
+                            prop_total <= 1 ~ 'high'))
+
+# Make segments that will label groups. Default width of bars. 
+width <- .45 
+df_segment <- contin_cases %>% 
+  ungroup() %>% 
+  # Convert location to numerics
+  mutate(loc_num = as.numeric(fct_reorder(location, prop_total))) %>%
+  group_by(rating) %>% 
+  summarise(x = min(loc_num) - width, xend = max(loc_num) + width,
+            y = max(prop_total) * 1.5, yend = max(prop_total) * 1.5)
+
+
 #Ploting it on a bar chart. 
-plot1 <- ggplot(contin_cases, 
-           aes(x = reorder(location, prop_total),
-               y = prop_total,
-               fill = location)) +
-  geom_bar(stat="identity", color="white") +
+ggplot(contin_cases,aes(
+    x = reorder(location, prop_total),
+    y = prop_total,
+    fill = location)) +
+  geom_bar(stat = "identity", color = "white") +
   ylim(0, 1) +
-  geom_text(aes(y = prop_total,
-                label = round(prop_total, 4)),
-            vjust = -1.5) +
-  scale_fill_manual(name = "Continent", 
-                    values = cbbPalette) +
-  labs(title = "Proportion of total COVID-19 Cases Per Continent", 
-       subtitle = "Northern Hemisphere seems to be faring worse overall", 
-       caption ="Figure 1. Asia leads total COVID case count as of May 23rd, 2021. No data exists in this dataset for Antarctica.") +
+  geom_segment(data = df_segment, aes(
+    x = x,
+    xend = xend,
+    y = max(y),
+    yend = max(yend),
+    color = rating,
+    group = rating),
+    inherit.aes = FALSE,
+    show.legend = FALSE) +
+  geom_text(data = df_segment, aes(
+    x = .5 * (x + xend),
+    y = max(y),
+    label = str_to_title(rating),
+    color = rating),
+    vjust = -.5,
+    inherit.aes = FALSE,
+    show.legend = FALSE) +
+  geom_text(aes(
+    y = prop_total,
+    label = round(prop_total, 4)),
+    vjust = -1.5) +
+  scale_fill_manual(
+    name = "Continent",
+    values = cbbPalette) +
+  labs(
+    title = "Proportion of total COVID-19 Cases Per Continent",
+    caption = "Figure 1. Asia leads total COVID case count as of May 23rd, 2021. No data exists in this dataset for Antarctica.") +
   ylab("Proportion of total cases") +
-  xlab("")+ #this makes x-axis blank
-  theme_classic()+
-    theme(
+  xlab("") + # this makes x-axis blank
+  theme_classic() +
+  theme(
     plot.caption = element_text(hjust = 0, face = "italic"))
 
 ggsave("plot1.png")
