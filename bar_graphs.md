@@ -112,10 +112,10 @@ ggplot(contin_cases,aes(
   theme(
     plot.caption = element_text(hjust = 0, face = "italic"))
 
-ggsave("plot1.png")
+ggsave("covid_plot.png")
 ```
 
-![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/plot1.png)
+![](https://raw.githubusercontent.com/mswiseman/R-examples/main/_plots/covid_plot.png)
 
 ### Example 2: Transportation
 
