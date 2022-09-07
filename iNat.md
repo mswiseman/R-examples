@@ -5,9 +5,6 @@ An Introduction to Mapping iNaturalist Data
 
 Written by Michele Wiseman
 
-Updated September 6th, 2022
-
-
 # Using iNaturalist data
 
 [iNaturalist](https://www.inaturalist.org/) is a wonderful tool that helps bridge the gap between
